@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  samba: 
+    image: dperson/samba
+    container_name: mySamba1
+    tty: true
+    networks:
+      - default
+    ports:
+      - "139:139"
+      - "445:445"
+    environment:
+      - TZ=EST5EDT
+    command: '-u "admin;admin" -u "user1;xpto" -u "user2;xpto" -p'
+    volumes:
+      - ./cfg/samba/:/etc/samba/
+      - ./data/private:/data/private
+      - ./data/public:/data/public
+      - ./data/usr1:/data/usr1
+      - ./data/usr2:/data/usr2
